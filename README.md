@@ -1,2 +1,2 @@
 # PersonalProject2
-헬스 케어 사이트
+홈트레이닝 사이트
