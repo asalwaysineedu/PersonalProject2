@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum MemberRole {
     MEMBER("ROLE_MEMBER"),     // 일반 유저
-    TRAINER("ROLE_TRAINER"),    // 트레이너
     MANAGER("ROLE_MANAGER");     // 사이트 관리자
 
     private final String value; // value값을 못 바꾸게 final로
