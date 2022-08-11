@@ -1,0 +1,182 @@
+$color: #E8E8F3;
+
+@mixin neustyle( 
+		$color, 
+		$hover: false, 
+		$direction: topleft, 
+		$inset: false, 
+		$distance: 2px 
+	) {
+	$v: 2px;
+	
+	@if $distance {
+		$v: $distance;		
+	}
+
+	$topX: ($v*2*-1);
+	$topY: ($v*2*-1);
+		
+	@if $direction == 'topcenter' {
+		$topX: 0px;
+		$topY: ($v*2*-1);
+	}
+	@if $direction == 'topright' {
+		$topX: ($v*2);
+		$topY: ($v*2*-1);
+	}
+		
+	$out: $topX $topY ($v*3) rgba(#fff,.7),
+		  $topX*-1 $topY*-1 ($v*3) darken($color,12),
+		  inset $topX $topY ($v*6) rgba(#fff,.1),
+		  inset $topX*-1 $topY*-1 ($v*6) darken($color,0);
+
+	$in: $topX $topY ($v*5) rgba(#fff,.2),
+		 $topX*-1 $topY*-1 ($v*3) darken($color,0),
+		 inset $topX $topY ($v*6) rgba(#fff,.6),
+	     inset $topX/2 $topY/2 ($v) rgba(#fff,.2),
+		 inset $topX*-1 $topY*-1 ($v*3) darken($color,10);
+		
+	@if $inset {
+		box-shadow: $in;
+	}
+	@else {
+		box-shadow: $out;
+	}
+		
+	@if $hover {
+		&:hover {
+			@if $inset {
+				box-shadow: $out;
+			}
+			@else {
+				box-shadow: $in;
+			}
+		}
+	}
+}
+
+// =============================================
+
+body {
+	background-color: $color;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	
+	> form, > div {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		padding: 5vh 0;
+	}
+}
+
+[class*="button"] {
+	transition: box-shadow .3s ease, color .3s ease;
+	display: inline-block;
+	height: 48px;
+	border-radius: 50em;
+	text-align: center;
+	line-height: 48px;
+	color: darken($color,15);
+	letter-spacing: .1em;
+	font-weight: bold;
+	cursor: pointer;
+	text-transform: uppercase;
+	text-shadow: 1px 1px rgba(#fff,.6);
+	margin: 0 1.5em;
+	padding: 0 3em;
+	
+	&:hover {
+		color: darken(#E8E8F3,25);
+	}
+}
+
+.buttonA {
+	@include neustyle( $color, true );
+	
+	&::before {
+		content: "top left";
+	}
+}
+.buttonB {
+	@include neustyle( $color, true, topcenter );
+	
+	&::before {
+		content: "top center";
+	}
+}
+.buttonC {
+	@include neustyle( $color, true, topright );
+	
+	&::before {
+		content: "top right";
+	}
+}
+
+.buttonA_far {
+	@include neustyle( $color, true, topleft, false, 5px );
+	
+	&::before {
+		content: "top left";
+	}
+}
+.buttonB_far {
+	@include neustyle( $color, true, topcenter, false, 5px );
+	
+	&::before {
+		content: "";
+	}
+}
+.buttonC_far {
+	@include neustyle( $color, true, topright, false, 5px );
+	
+	&::before {
+		content: "top right";
+	}
+}
+
+[class*="button"] {
+	position: relative;
+	
+	&::before {
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+		width: max-content;
+		transform: translateX(-50%);
+		font-size: 10px;
+		color: darken($color,8);
+		pointer-events: none;
+	}
+}
+
+form {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+input {
+	@include neustyle( $color, false, topcenter, true );
+	border: none;
+	padding: 1em 2em;
+	border-radius: 50em;
+	background: transparent;
+	margin: 0 1.5em;
+	color: darken($color,15);
+	text-shadow: 1px 1px rgba(#fff,.6);
+	
+	&::placeholder {
+		color: darken($color,15);
+		text-shadow: 1px 1px rgba(#fff,.6);
+	}
+	
+	&:focus {
+		outline: none;
+		color: darken($color,20);
+	}
+}
