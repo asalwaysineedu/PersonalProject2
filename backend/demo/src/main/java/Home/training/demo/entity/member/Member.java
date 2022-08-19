@@ -29,7 +29,6 @@ JPA나 json parser와 같은 라이브러리를 쓸 때에는 반드시 클래�
 방법은 전체 필드를 사용하는 생성자를 직접 선언하고 그 생성자에 @Builder 어노테이션을 쓰든가,
 아니면 @NoArgsConstructor 와 @AllArgsConstructor를 모두 쓰면 된다.
 */
-@Table(name = "member")
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
