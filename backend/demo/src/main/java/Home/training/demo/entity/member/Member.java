@@ -2,19 +2,16 @@ package Home.training.demo.entity.member;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Data
 @Entity
-@Getter
-@Builder
-@AllArgsConstructor //모든 필드 값을 파라미터로 받는 생성자를 만듦
+//@AllArgsConstructor //모든 필드 값을 파라미터로 받는 생성자를 만듦
 @NoArgsConstructor //파라미터가 없는 기본 생성자를 생성
 /*
 getter,setter를 사용하는 이유는 클래스의 필드에 직접 접근하는걸 막기 위해서다.
@@ -32,6 +29,7 @@ JPA나 json parser와 같은 라이브러리를 쓸 때에는 반드시 클래�
 방법은 전체 필드를 사용하는 생성자를 직접 선언하고 그 생성자에 @Builder 어노테이션을 쓰든가,
 아니면 @NoArgsConstructor 와 @AllArgsConstructor를 모두 쓰면 된다.
 */
+@Table(name = "member")
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,10 +53,32 @@ public class Member {
     @CreationTimestamp
     private Date regDate;
 
-    // EnumType.STRING : enum 이름을 DB에 저장 !! STRING 설정은 문자열 자체가 저장되기 때문에 DB 공간 낭비가 발생한다.
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private MemberRole roles;
+    @UpdateTimestamp
+    private Date updDate;
 
-    private String refreshToken;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_no")
+    private List<MemberAuth> authList;
+
+    public Member (String email, String password, String nickname, String mobile, String profileImg) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.mobile = mobile;
+        this.profileImg = profileImg;
+    }
+    //mobile이 필요한가? 일단 넣어놓기로..
+
+    public void addAuth (MemberAuth auth) {
+        if (authList == null) {
+            authList = new ArrayList<MemberAuth>();
+        }
+
+        authList.add(auth);
+    }
+
+    public void clearAuthList () {
+        authList.clear();
+    }
+
 }
