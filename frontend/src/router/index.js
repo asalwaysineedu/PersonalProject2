@@ -21,7 +21,7 @@ const routes = [
     component: IntroPage
   },
   {
-    path: '/MainPage',
+    path: '/mainPage',
     name: 'MainPage',
     component: MainPage
   },

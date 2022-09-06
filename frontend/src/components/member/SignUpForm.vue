@@ -1,41 +1,26 @@
 <template>
   <div class="signup-wrap">
     <div class="signup-header">
-      <h2>환영합니다</h2>
+      <h1>환영합니다</h1>
       <p>가입을 통해 더 다양한 서비스를 만나보세요!</p>
     </div>
 
   <div class="form-wrap">
-    <v-form ref="form" v-model="form">
+    <v-form @submit.prevent="onSubmit">
       
-      <v-row>
-            <v-col>
-              <v-btn 
-              @click="btnI" 
-              depressed
-              rounded
-              style="width: 100%; height: 5rem; font-size: 1rem"
-              :class="{'success': isMember, 'gray': true}"
-              >일반</v-btn>
-            </v-col>
-
-            <v-col>
-              <v-btn 
-              @click="btnM" 
-              depressed
-              rounded
-              style="width: 100%; height: 5rem; font-size: 1rem"  
-              :class="{'success': isManager, 'gray': true}">관리자</v-btn>
-            </v-col>
-      </v-row>
-
-      <v-row>
+      <!-- 개인 / 사업자 선택 -->
+      <v-radio-group v-model="radioGroup" row>
+        <v-radio :label="`${kindsOfMember[0]}`" :value="`${kindsOfMember[0]}`"></v-radio>
+        <v-radio :label="`${kindsOfMember[1]}`" :value="`${kindsOfMember[1]}`"></v-radio>
+      </v-radio-group>
+      
+        <v-row>
         <v-col sm="9">
           <v-text-field
-                label="이메일"
-                class="email"
-                v-model="email"
-                :rules="emailRules"
+                label="아이디"
+                class="id"
+                v-model="id"
+                :rules="idRules"
                 type="text"
                 single-line
                 filled
@@ -63,7 +48,6 @@
           label="비밀번호 확인"
           class="password-check"
           :rules="passwordCheckRules"
-          v-model="PasswordCheck"
           type="password"
           single-line
           filled
@@ -79,9 +63,9 @@
           filled
           dense
           rounded
-          ></v-text-field>
+        ></v-text-field>
 
-      <v-row>
+      <!--<v-row>
         <v-col sm="9">
           <v-text-field
             label="핸드폰 번호"
@@ -96,20 +80,20 @@
         <v-col sm="3">
           <v-btn depressed rounded outlined color="#2a46ff" @click="checkMobile()">본인인증</v-btn>
         </v-col>
-      </v-row>
-     
+      </v-row>-->
+
+      <div class="signup-btn">
+        <v-btn 
+        style="width:100%"
+        depressed
+        rounded
+        outlined color="#2a46ff"
+        type="submit"
+        >가입하기</v-btn>
+          <router-link :to="{ name: 'LoginPage' }">이미 계정이 있으신가요?</router-link>
+      </div>
+
     </v-form>
-
-    <div class="signup-btn">
-    <v-btn 
-    style="width:100%"
-    depressed
-    rounded
-    >가입하기</v-btn>
-
-      <router-link :to="{ name: 'LoginPage' }">이미 아이디가 있으신가요?</router-link>
-    </div>
-
     
   </div>
   </div>
@@ -120,16 +104,17 @@ export default {
     name: 'SignUpForm',
     data() {
       return {
-        role: "",
-        email: "",
-        password: "",
-        passwordChecking: "",
-        nickname: "",
-        mobile: "",
-        emailRules: [
-        (v) => !!v || "이메일을 입력해 주세요.",
-        (v) => /.+@.+\..+/.test(v) || "이메일 형식으로 입력해 주세요",
-        (v) => /^[a-zA-Z0-9@.]*$/.test(v) || "다시 한번 확인해 주세요",
+        radioGroup: 1,
+        kindsOfMember: [
+        '개인',
+        '관리자'
+        ],
+        id: '',
+        password: '',
+        passwordChecking: '',
+        nickname: '',
+        idRules: [
+        (v) => !!v || "아이디를 입력해 주세요."
         ],
         passwordRules: [
         (v) => !!v || "비밀번호를 입력해 주세요.",
@@ -144,51 +129,20 @@ export default {
         nicknameRules: [
         (v) => !!v || "닉네임을 입력해 주세요.",
         (v) => !(v && v.length > 9) || "8글자 이하만 가능합니다.",
-        ],
-        mobileRules: [
-        (v) => !!v || "핸드폰 번호를 입력해 주세요.",
-        ],
+        ]
       }
+    },
+    methods: {
+      onSubmit() {
+        const { id, password, nickname, radioGroup } = this;
+        const auth = (radioGroup == '개인' ? '개인' : '관리자')
+        this.$emit('submit', { id, password, nickname, auth })
+      },
     }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/abstracts/_variables.scss';
-
-  .signup-header {
-    h2 {
-      text-align: center;
-      padding: 120px 0px 0px 0px;
-    }
-    p {
-      text-align: center;
-      padding: 5px 0px 20px 0px;
-      font-size: 0.8rem;
-    }
-  }
-
-  .signup-wrap {
-    margin: auto;
-    width: 25%;
-  }
-
-  .signup-btn {
-
-    text-align: center;
-      a {
-    font-size: 0.8rem;
-  }
-  }
-
-  .v-text-field ::v-deep input {
-    font-size: 0.85rem;
-  }
-
-  .v-text-field ::v-deep label {
-    font-size: 0.85em;
-  }
-
-  
-
+@import '~@/assets/scss/member/SignUpForm.scss';
 </style>

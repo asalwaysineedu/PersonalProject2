@@ -3,7 +3,9 @@
     <v-main style="padding: 0">
       <div v-if="
       this.$route.name == 'MainPage' ||
-      this.$route.name == 'NoticeListPage'
+      this.$route.name == 'NoticeListPage' ||
+      this.$route.name == 'NoticeRegisterPage' ||
+      this.$route.name == 'NoticeModifyPage'
       
       ">
         <the-header/>
@@ -28,3 +30,11 @@ export default {
   },
 }
 </script>
+
+<style>
+
+a {
+  text-decoration: none;
+}
+
+</style>

@@ -1,4 +1,4 @@
-package Home.training.demo.controller.config;
+package Home.training.demo.security;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;

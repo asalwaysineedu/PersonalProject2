@@ -1,23 +1,20 @@
 <template>
   <div class="main-wrap">
-    <img src="@/assets/banner.png">
-
+    <div class="swiper-wrap">
+      <the-swiper/>
+    </div>
   </div>
 </template>
 
 <script>
-
-
+import TheSwiper from '@/components/swiper/TheSwiper.vue'
 export default {
     components: {
-
+      TheSwiper
     }
 }
 </script>
 
 <style scoped>
 
-  .main-wrap {
-   
-  }
 </style>

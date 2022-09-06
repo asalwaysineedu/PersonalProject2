@@ -1,6 +1,6 @@
 package Home.training.demo.service.member;
 
-import Home.training.demo.dto.member.MemberRequest;
+import Home.training.demo.controller.member.request.MemberRequest;
 import Home.training.demo.entity.member.Member;
 import Home.training.demo.entity.member.MemberAuth;
 import Home.training.demo.repository.member.MemberAuthRepository;
@@ -24,22 +24,25 @@ public class MemberServiceImpl implements MemberService {
     private MemberAuthRepository memberAuthRepository;
 
     // 회원가입
-    /*
-        1. passwordEncoder
-
-    */
     @Override
     public void register(MemberRequest memberRequest) {
+        // 비밀번호 암호화
         String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
         memberRequest.setPassword(encodedPassword);
 
         MemberAuth authEntity = new MemberAuth(memberRequest.getAuth());
         Member memberEntity = new Member(
-                memberRequest.getEmail(), memberRequest.getPassword(), memberRequest.getNickname(),
-                memberRequest.getProfileImg(), memberRequest.getAuth());
+                memberRequest.getId(), memberRequest.getPassword(), memberRequest.getNickname());
 
         memberEntity.addAuth(authEntity);
+
         memberRepository.save(memberEntity);
+    }
+
+    // 이메일 중복 여부 체크
+    @Override
+    public boolean checkid(String id) {
+        return false;
     }
 
 }

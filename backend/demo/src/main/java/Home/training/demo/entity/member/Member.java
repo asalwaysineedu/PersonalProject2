@@ -11,8 +11,8 @@ import java.util.List;
 
 @Data
 @Entity
-//@AllArgsConstructor //모든 필드 값을 파라미터로 받는 생성자를 만듦
 @NoArgsConstructor //파라미터가 없는 기본 생성자를 생성
+@Table(name = "member")
 /*
 getter,setter를 사용하는 이유는 클래스의 필드에 직접 접근하는걸 막기 위해서다.
 객체의 데이터는 함부로 공개하지 않는다.
@@ -35,16 +35,13 @@ public class Member {
     private Long memberNo;
 
     @Column(nullable = false)
-    private String email;
+    private String id;
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false, length = 8)
     private String nickname;
-
-    @Column(nullable = false)
-    private String mobile;
 
     @Column
     private String profileImg;
@@ -59,25 +56,24 @@ public class Member {
     @JoinColumn(name = "member_no")
     private List<MemberAuth> authList;
 
-    public Member (String email, String password, String nickname, String mobile, String profileImg) {
-        this.email = email;
+    public Member (String id, String password, String nickname) {
+        this.id = id;
         this.password = password;
         this.nickname = nickname;
-        this.mobile = mobile;
-        this.profileImg = profileImg;
     }
-    //mobile이 필요한가? 일단 넣어놓기로..
+
+    public void MemberRequest() {
+
+    }
 
     public void addAuth (MemberAuth auth) {
         if (authList == null) {
             authList = new ArrayList<MemberAuth>();
         }
-
         authList.add(auth);
     }
 
     public void clearAuthList () {
         authList.clear();
     }
-
 }
