@@ -38,16 +38,16 @@ export default {
         axios.post('http://localhost:7777/member/login', {id, password})
             .then(res => {
               if (res.data) {
-                alert('로그인 성공!')
+                alert('안녕하세요 ' + res.data.id + '님!')
                 this.$store.state.userInfo = res.data
                 this.$cookies.set("user", res.data, 300)
                 this.isLogin = true
+                localStorage.setItem("userInfo", JSON.stringify(res.data))
                 this.$router.push({
                     name: 'MainPage'
                 })
-                localStorage.setItem("loginId", id)
               } else {
-                alert('로그인 실패!')
+                alert('아이디 혹은 비밀번호가 올바르지 않습니다.')
               }
             })
             .catch(res => {
@@ -55,14 +55,8 @@ export default {
             })
       } else {
         alert('이미 로그인이 되어 있습니다.')
+        this.$router.push({ name: 'MainPage' })
       }
-    },
-    logout () {
-      this.$cookies.remove("user")
-      this.isLogin = false
-      this.$store.state.userInfo = null
-
-      alert('로그아웃 성공')
     }
   }
 }

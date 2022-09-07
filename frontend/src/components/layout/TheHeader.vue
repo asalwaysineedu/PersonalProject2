@@ -46,7 +46,7 @@
         </v-btn>
         
         <!-- 프로필 -->
-        <v-btn icon color="#333984" class="mt-4 mr-12">
+        <v-btn icon color="#333984" class="mt-4 mr-12" @click="logout">
             <v-icon>mdi-alien-outline</v-icon>
         </v-btn>
     </div>
@@ -74,6 +74,14 @@ export default {
         search() {
             console.log(this.keyword)
             this.$router.push({name: 'SearchPage', params: { keyword: this.keyword }})
+        },
+        logout() {
+            localStorage.removeItem("userInfo")
+            this.$cookies.remove("user")
+            this.isLogin = false
+            this.$store.state.userInfo = null
+            alert('로그아웃 되었습니다.')
+            this.$router.push({name: 'LoginPage'})
         }
     }
 }

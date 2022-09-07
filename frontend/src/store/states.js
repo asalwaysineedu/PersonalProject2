@@ -1,3 +1,3 @@
 export default {
-    userInfo: null,
+    userInfo: JSON.parse(localStorage.getItem('userInfo')),
 }

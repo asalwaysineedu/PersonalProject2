@@ -41,7 +41,7 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(memberEntity);
     }
 
-    // 이메일 중복 여부 체크
+    // 아이디 중복 여부 체크
     @Override
     public boolean checkId(String id) {
         // DB에 가서 지금 요청들어온 아이디랑 똑같은 아이디가 있는지 찾아봐라
@@ -56,30 +56,33 @@ public class MemberServiceImpl implements MemberService {
         Optional<Member> maybeMember = memberRepository.findById(memberRequest.getId());
 
         if (maybeMember == null) {
-            log.info("There are no person who has this id!");
+            log.info("해당 아이디의 멤버가 없습니다.");
             return null;
         }
 
         Member loginMember = maybeMember.get();
 
         if (!passwordEncoder.matches(memberRequest.getPassword(), loginMember.getPassword())) {
-            log.info("Entered wrong password!");
+            log.info("비밀번호를 잘못 입력했습니다.");
             return null;
         }
 
-        Optional<MemberAuth> maybeMemberAuth =
-                memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
-
-        if (maybeMemberAuth == null) {
-            log.info("no auth");
-            return null;
+        if (loginMember.getId().equals(memberRequest.getId())) {
+            memberRequest.setMemberNo(loginMember.getMemberNo());
+            memberRequest.setId(loginMember.getId());
+            memberRequest.setPassword(loginMember.getPassword());
+            memberRequest.setNickname(loginMember.getNickname());
+            memberRequest.setProfileImg(loginMember.getProfileImg());
         }
 
-        MemberAuth memberAuth = maybeMemberAuth.get();
+
         MemberRequest response = new MemberRequest(
+                memberRequest.getMemberNo(),
                 memberRequest.getId(),
                 null,
-                memberAuth.getAuth()
+                memberRequest.getNickname(),
+                memberRequest.getProfileImg(),
+                memberRequest.getAuth()
         );
 
         return response;
