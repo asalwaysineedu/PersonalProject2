@@ -21,4 +21,6 @@ public class MemberRequest {
         this.profileImg = profileImg;
     }
 
+    public MemberRequest(String id, Object o, String auth) {
+    }
 }

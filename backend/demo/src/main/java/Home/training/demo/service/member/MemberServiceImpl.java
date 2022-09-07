@@ -53,7 +53,36 @@ public class MemberServiceImpl implements MemberService {
     // 로그인
     @Override
     public MemberRequest login(MemberRequest memberRequest) {
-        return null;
+        Optional<Member> maybeMember = memberRepository.findById(memberRequest.getId());
+
+        if (maybeMember == null) {
+            log.info("There are no person who has this id!");
+            return null;
+        }
+
+        Member loginMember = maybeMember.get();
+
+        if (!passwordEncoder.matches(memberRequest.getPassword(), loginMember.getPassword())) {
+            log.info("Entered wrong password!");
+            return null;
+        }
+
+        Optional<MemberAuth> maybeMemberAuth =
+                memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
+
+        if (maybeMemberAuth == null) {
+            log.info("no auth");
+            return null;
+        }
+
+        MemberAuth memberAuth = maybeMemberAuth.get();
+        MemberRequest response = new MemberRequest(
+                memberRequest.getId(),
+                null,
+                memberAuth.getAuth()
+        );
+
+        return response;
     }
 
 }
