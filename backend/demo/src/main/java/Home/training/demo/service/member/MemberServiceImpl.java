@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 
         MemberAuth authEntity = new MemberAuth(memberRequest.getAuth());
         Member memberEntity = new Member(
-                memberRequest.getId(), memberRequest.getPassword(), memberRequest.getNickname());
+                memberRequest.getId(), memberRequest.getPassword(), memberRequest.getNickname(), memberRequest.getProfileImg());
 
         memberEntity.addAuth(authEntity);
 
@@ -43,6 +43,12 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public boolean checkid(String id) {
         return false;
+    }
+
+    // 로그인
+    @Override
+    public MemberRequest login(MemberRequest memberRequest) {
+        return null;
     }
 
 }

@@ -11,12 +11,14 @@ public class MemberRequest {
     private String password;
     private String nickname;
     private String auth;
+    private String profileImg;
 
-    public MemberRequest (String id, String password, String nickname, String auth){
+    public MemberRequest (String id, String password, String nickname, String auth, String profileImg){
         this.id = id;
         this.password = password;
         this.nickname = nickname;
         this.auth = auth;
+        this.profileImg = profileImg;
     }
 
 }

@@ -56,10 +56,11 @@ public class Member {
     @JoinColumn(name = "member_no")
     private List<MemberAuth> authList;
 
-    public Member (String id, String password, String nickname) {
+    public Member (String id, String password, String nickname, String profileImg) {
         this.id = id;
         this.password = password;
         this.nickname = nickname;
+        this.profileImg = profileImg;
     }
 
     public void MemberRequest() {

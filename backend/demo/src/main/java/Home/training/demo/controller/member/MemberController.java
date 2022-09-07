@@ -24,7 +24,8 @@ public class MemberController {
                 memberRequest.getId() + ", " +
                 memberRequest.getPassword() + ", " +
                 (memberRequest.getAuth().equals("관리자") ? "ROLE_ADMIN" : "ROLE_INDIVIDUAL") + ", " +
-                memberRequest.getNickname()
+                memberRequest.getNickname() + ", " +
+                memberRequest.getProfileImg()
         );
 
         memberService.register(memberRequest);
@@ -41,19 +42,18 @@ public class MemberController {
     }
 
     // 로그인
-    /*@PostMapping("/login")
-    public String [] login (@Validated @RequestBody LoginDto loginDto) throws Exception{
+    @PostMapping("/login")
+    public MemberRequest Login (@RequestBody MemberRequest memberRequest) {
+        log.info("MemberLogin(): " + memberRequest);
 
-        log.info("Member Login(): " + loginDto);
+        MemberRequest memberResponse = memberService.login(memberRequest);
 
-        String [] response = service.login(loginDto);
-        log.info("check" + response);
-
-        if (response != null) {
-            log.info("로그인 성공!");
+        if (memberResponse != null) {
+            log.info("login success");
         } else {
-            log.info("로그인 실패!");
+            log.info("login fail");
         }
-        return response;
-    }*/
+
+        return memberResponse;
+    }
 }

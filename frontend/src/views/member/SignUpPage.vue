@@ -13,7 +13,9 @@ export default {
     methods: {
         onSubmit(payload) {
             const { id, password, nickname, auth } = payload
-            axios.post('http://localhost:7777/member/register', { id, password, nickname, auth })
+
+            let profileImg = 'profile_base_img.jpg';
+            axios.post('http://localhost:7777/member/register', { id, password, nickname, auth, profileImg })
             .then(res => {
               alert('등록 성공! - ' + res)
               this.$router.push({
@@ -23,7 +25,8 @@ export default {
             .catch(res => {
               alert(res.response.data.message)
             })
-        }
+        },
+        
     }
 }
 
