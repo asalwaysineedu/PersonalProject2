@@ -42,6 +42,9 @@ export default {
                 this.$store.state.userInfo = res.data
                 this.$cookies.set("user", res.data, 30)
                 this.isLogin = true
+                this.$router.push({
+                    name: 'MainPage'
+                })
               }
             })
             .catch(res => {

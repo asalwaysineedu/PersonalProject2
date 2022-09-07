@@ -46,7 +46,7 @@
         </v-btn>
         
         <!-- 프로필 -->
-        <v-btn icon color="#333984" class="mt-4 mr-12" @click="myPage">
+        <v-btn icon color="#333984" class="mt-4 mr-12">
             <v-icon>mdi-alien-outline</v-icon>
         </v-btn>
     </div>
@@ -59,7 +59,7 @@ export default {
         return {
             menuLinks: [
                 { text: "홈", route: "/MainPage" },
-                { text: "공지사항", route: "/NoticeListPage" },
+                { text: "공지사항", route: "/Notice" },
                 { text: "NEW! 요즘 대세 운동", route: "/popular" },
                 { text: "내가 찜한 영상", route: "my-list" },
             ],
