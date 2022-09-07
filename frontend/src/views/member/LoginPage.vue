@@ -40,11 +40,14 @@ export default {
               if (res.data) {
                 alert('로그인 성공!')
                 this.$store.state.userInfo = res.data
-                this.$cookies.set("user", res.data, 30)
+                this.$cookies.set("user", res.data, 300)
                 this.isLogin = true
                 this.$router.push({
                     name: 'MainPage'
                 })
+                localStorage.setItem("loginId", id)
+              } else {
+                alert('로그인 실패!')
               }
             })
             .catch(res => {
