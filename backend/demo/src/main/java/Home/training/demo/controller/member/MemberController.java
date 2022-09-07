@@ -34,11 +34,11 @@ public class MemberController {
     // 아이디 중복 여부 체크
     @GetMapping("/checkId/{id}")
     public ResponseEntity<Boolean> checkId (@PathVariable String id) {
-        log.info("checkid(): " + id);
+        log.info("checkId(): " + id);
 
-        boolean checkid = memberService.checkid(id);
+        boolean checkId = memberService.checkId(id);
 
-        return ResponseEntity.ok(memberService.checkid(id));
+        return ResponseEntity.ok(memberService.checkId(id));
     }
 
     // 로그인

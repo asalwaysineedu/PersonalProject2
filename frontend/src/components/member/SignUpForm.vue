@@ -13,7 +13,8 @@
         <v-radio :label="`${kindsOfMember[0]}`" :value="`${kindsOfMember[0]}`"></v-radio>
         <v-radio :label="`${kindsOfMember[1]}`" :value="`${kindsOfMember[1]}`"></v-radio>
       </v-radio-group>
-      
+
+    
         <v-row>
         <v-col sm="9">
           <v-text-field
@@ -29,7 +30,7 @@
                 ></v-text-field>
         </v-col>
         <v-col sm="3">
-          <v-btn depressed rounded outlined color="#2a46ff">중복확인</v-btn>
+          <v-btn depressed rounded outlined color="#2a46ff" @click="checkId">중복확인</v-btn>
         </v-col>
       </v-row>
 
@@ -138,6 +139,10 @@ export default {
         const auth = (radioGroup == '개인' ? '개인' : '관리자')
         this.$emit('submit', { id, password, nickname, auth })
       },
+      checkId() {
+        const {id} = this;
+        this.$emit('checkId', {id});
+      }
     }
 }
 </script>

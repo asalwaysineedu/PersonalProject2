@@ -1,6 +1,8 @@
 <template>
     <div class="signup-wrap">
-        <sign-up-form @submit ="onSubmit"/>
+        <sign-up-form @submit ="onSubmit"
+                      @checkId="checkDoubleId"
+        />
     </div>
 </template>
 
@@ -10,6 +12,11 @@ import axios from 'axios'
 export default {
     name: 'SignUpPage',
     components: { SignUpForm },
+    data() {
+        return{
+            checkId: false,
+        }
+    },
     methods: {
         onSubmit(payload) {
             const { id, password, nickname, auth } = payload
@@ -26,7 +33,17 @@ export default {
               alert(res.response.data.message)
             })
         },
-        
+        async checkDoubleId(payload) {
+            const {id} = payload;
+            let response = await axios.get(`http://localhost:7777/member/checkId/${id}`)
+            if(response.data === true){
+                alert('사용가능한 아이디입니다.')
+                this.checkDoubleId = true;
+            }else{
+                alert('이미 사용중인 아이디입니다.')
+                this.checkDoubleId = false;
+            }
+        }
     }
 }
 

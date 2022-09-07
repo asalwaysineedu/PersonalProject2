@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -41,8 +43,11 @@ public class MemberServiceImpl implements MemberService {
 
     // 이메일 중복 여부 체크
     @Override
-    public boolean checkid(String id) {
-        return false;
+    public boolean checkId(String id) {
+        // DB에 가서 지금 요청들어온 아이디랑 똑같은 아이디가 있는지 찾아봐라
+        Optional<Member> check = memberRepository.checkId(id);
+        System.out.println("check : " + check.isEmpty());
+        return check.isEmpty();
     }
 
     // 로그인
