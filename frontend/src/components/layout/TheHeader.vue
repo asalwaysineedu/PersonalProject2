@@ -1,54 +1,35 @@
 <template>
     <div class="nav-list-bar">
-        <v-toolbar height="40px" max-width="130px" elevation="0" class="nav-list">
-            <!-- 로고 -->
-            <v-toolbar-title>
-                <router-link to="/">
-                        <img src="@/assets/healflix_logo.png" style="width:100px"/>
-                </router-link>
-            </v-toolbar-title>
-        </v-toolbar>
-
-        <!-- 메뉴 -->
-        <v-toolbar-items>
-            <v-btn
-            active-class="main-active"
-            class="header_main_item"
-            text
-            color="#333984"
-            v-for="link in menuLinks"
-            :key="link.icon"
-            :to="link.route">
-                {{ link.text }}
-            </v-btn>
-        </v-toolbar-items>
+        <v-app-bar flat color="white">
+        <!-- 로고 -->
+        <router-link to="/">
+                <h1><img src="@/assets/healflix_logo.png" style="width:100px" class="mt-3 ml-2"/></h1>
+        </router-link>
 
         <v-spacer></v-spacer>
-
         <!-- 검색 -->
-        <v-toolbar-items>     
-            <v-text-field
-                label="제목, 사람, 부위"
-                hide-details
-                append-icon="mdi-magnify"
-                v-model="keyword"
-                single-line
-                filled
-                dense
-                rounded
-                class="mt-3 mr-5"
-              ></v-text-field>
-        </v-toolbar-items>
+        <v-text-field
+            label="검색"
+            hide-details
+            append-icon="mdi-magnify"
+            v-model="keyword"
+            single-line
+            filled
+            dense
+            color="#2a46ff"
+            rounded></v-text-field>
+        <v-spacer></v-spacer>
 
         <!-- 알람 -->
-        <v-btn icon color="#333984" class="mt-4 mr-3">
+        <v-btn icon color="#2a46ff">
             <v-icon>mdi-chat</v-icon>
         </v-btn>
         
         <!-- 프로필 -->
-        <v-btn icon color="#333984" class="mt-4 mr-12" @click="logout">
+        <v-btn icon color="#2a46ff" @click="logout" class="mr-1">
             <v-icon>mdi-alien-outline</v-icon>
         </v-btn>
+        </v-app-bar>
     </div>
 </template>
 
@@ -89,23 +70,6 @@ export default {
 
 <style scoped>
 
-    .nav-list {
-        margin: 15px 0px 0px 40px;
-    }
-    .nav-list-bar {
-        display: flex;
-        height: 60px;
-    }
-    .header_main_item {
-        margin-top: px;
-        font-weight: bold;
-    }
-    .header_main_item::before {
-        display: none;
-    }
-    .header_main_item :hover {
-        color: #2a46ff;
-    }
     .v-text-field {
         font-size: 0.85rem;
 
@@ -116,24 +80,5 @@ export default {
     .v-btn::before {
         display: none;
     }
-    /*
-    .nav-list-ul {
-        list-style: none;
-    }
-
-    .nav-list-ul li {
-        font-size: 0.9rem;
-        float: left;
-        margin: 10px 0px 0px 15px;
-    }
-
-    .nav-list-ul li a {
-        text-decoration: none;
-        color: #333984;
-    }
-    
-    .nav-list-ul li a:hover {
-        color: #2A46FF;
-    }*/
 
 </style>

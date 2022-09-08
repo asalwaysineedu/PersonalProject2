@@ -18,6 +18,7 @@ public class NoticeController {
     @Autowired
     private NoticeService service;
 
+    // 작성
     @PostMapping("/register")
     public void NoticeBoardRegister (@Validated @RequestBody Notice notice) {
         log.info("NoticeBoardRegister()");
@@ -25,6 +26,7 @@ public class NoticeController {
         service.register(notice);
     }
 
+    // 목록
     @GetMapping("/list")
     public List<Notice> NoticeBoardList () {
         log.info("NoticeBoardList()");
@@ -32,6 +34,7 @@ public class NoticeController {
         return service.list();
     }
 
+    // 읽기
     @GetMapping("/{noticeNo}")
     public Notice NoticeBoardRead (
             @PathVariable("noticeNo") Integer noticeNo) {
@@ -40,6 +43,7 @@ public class NoticeController {
         return service.read(noticeNo);
     }
 
+    // 수정
     @PutMapping("/{noticeNo}")
     public Notice NoticeBoardModify (
             @PathVariable("noticeNo") Integer noticeNo,
@@ -52,6 +56,7 @@ public class NoticeController {
         return notice;
     }
 
+    // 삭제
     @DeleteMapping("/{noticeNo}")
     public void NoticeBoardRemove (
             @PathVariable("noticeNo") Integer noticeNo) {

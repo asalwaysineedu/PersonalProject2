@@ -6,10 +6,14 @@
       this.$route.name == 'NoticeListPage' ||
       this.$route.name == 'NoticeRegisterPage' ||
       this.$route.name == 'NoticeModifyPage'
-      
       ">
         <the-header/>
       </div>
+      <!--<div v-if="
+      this.$route.name == 'MainPage'
+      ">
+        <the-tag-search/>
+      </div>-->
       <router-view/>
     </v-main>
     
@@ -18,10 +22,12 @@
 
 <script>
 import TheHeader from "@/components/layout/TheHeader.vue"
+//import TheTagSearch from "@/components/layout/TheTagSearch.vue"
 //import router from './router';
 export default {
   components: {
-    TheHeader
+    TheHeader,
+    //TheTagSearch
   },
   name: 'App',
   data() {

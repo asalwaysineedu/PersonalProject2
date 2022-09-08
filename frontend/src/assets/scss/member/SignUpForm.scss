@@ -1,0 +1,53 @@
+div {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+  }
+
+  .signup-header {
+    font-weight: bold;
+    color: #333984;
+    h1 {
+      text-align: center;
+      padding: 120px 0px 0px 0px;
+    }
+    p {
+      text-align: center;
+      padding: 2px 0px 20px 0px;
+      font-size: 0.8rem;
+      
+    }
+  }
+
+  .signup-wrap {
+    margin: auto;
+    width: 25%;
+  }
+
+  .signup-btn {
+      text-align: center;
+        a {
+      font-size: 0.8rem;
+    }
+  }
+
+  .v-text-field ::v-deep {
+    input {
+      font-size: 0.85rem;
+    }
+    label {
+      font-size: 0.85em;
+    }
+    .error--text {
+      color: #333984 !important;
+      caret-color: #333984 !important;
+    }
+
+    
+  }
+
+  .v-application .success {
+    background-color: #333984 !important;
+    border-color: $main-color !important;
+}

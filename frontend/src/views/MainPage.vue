@@ -1,16 +1,17 @@
 <template>
   <div class="main-wrap">
-    <div class="swiper-wrap">
-      <the-swiper/>
-    </div>
+      
+      <the-tag-search/>
+      <v-img src="@/assets/banner.png"/>
   </div>
 </template>
 
 <script>
-import TheSwiper from '@/components/swiper/TheSwiper.vue'
+import TheTagSearch from '@/components/layout/TheTagSearch.vue'
+
 export default {
     components: {
-      TheSwiper
+      TheTagSearch
     }
 }
 </script>
