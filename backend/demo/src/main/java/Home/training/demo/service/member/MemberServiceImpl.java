@@ -67,23 +67,24 @@ public class MemberServiceImpl implements MemberService {
             return null;
         }
 
-        if (loginMember.getId().equals(memberRequest.getId())) {
-            memberRequest.setMemberNo(loginMember.getMemberNo());
-            memberRequest.setId(loginMember.getId());
-            memberRequest.setPassword(loginMember.getPassword());
-            memberRequest.setNickname(loginMember.getNickname());
-            memberRequest.setProfileImg(loginMember.getProfileImg());
+        Optional<MemberAuth> maybeMemberAuth =
+                memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
+
+        if (maybeMemberAuth == null) {
+            log.info("no auth");
+            return null;
         }
 
-
+        MemberAuth memberAuth = maybeMemberAuth.get();
         MemberRequest response = new MemberRequest(
                 memberRequest.getMemberNo(),
                 memberRequest.getId(),
                 null,
                 memberRequest.getNickname(),
-                memberRequest.getProfileImg(),
-                memberRequest.getAuth()
+                memberAuth.getAuth(),
+                memberRequest.getProfileImg()
         );
+
 
         return response;
     }
