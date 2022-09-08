@@ -20,15 +20,58 @@
             rounded></v-text-field>
         <v-spacer></v-spacer>
 
-        <!-- 알람 -->
-        <v-btn icon color="#2a46ff">
-            <v-icon>mdi-chat</v-icon>
-        </v-btn>
+        <!-- 커뮤니티 메뉴 리스트 -->
+        <v-menu left open-on-hover offset-y>
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                icon
+                v-bind="attrs"
+                v-on="on"
+                color="#2a46ff">
+                <v-icon>mdi-cube-outline</v-icon>
+              </v-btn>
+            </template>
+
+            <v-list>
+              <v-list-item
+                v-for="(communityItem, c) in communityItems"
+                :key="c"
+                :to="communityItem.link"
+                link
+                
+              >
+                <v-list-item-title>{{ communityItem.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+        </v-menu>
+        
         
         <!-- 프로필 -->
-        <v-btn icon color="#2a46ff" @click="logout" class="mr-1">
-            <v-icon>mdi-alien-outline</v-icon>
-        </v-btn>
+        <v-menu left open-on-hover offset-y>
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                icon
+                v-bind="attrs"
+                v-on="on"
+                color="#2a46ff"
+                class="mr-1">
+                <v-icon>mdi-alien-outline</v-icon>
+              </v-btn>
+            </template>
+
+            <v-list>
+              <v-list-item
+                v-for="(userItem, u) in userItems"
+                :key="u"
+                :to="userItem.link"
+                link
+                @click="userItemMethod(userItem.action)"
+              >
+                <v-list-item-title>{{ userItem.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+        </v-menu>
+        
         </v-app-bar>
     </div>
 </template>
@@ -38,13 +81,15 @@ export default {
     name: 'TheHeader',
     data() {
         return {
-            menuLinks: [
-                { text: "홈", route: "/MainPage" },
-                { text: "공지사항", route: "/Notice" },
-                { text: "NEW! 요즘 대세 운동", route: "/popular" },
-                { text: "내가 찜한 영상", route: "my-list" },
+            communityItems: [
+                { title: '공지사항', link: '/Notice' },
+                { title: '1:1 문의', link: '' },
             ],
-            token: "",
+            userItems: [
+                { title: '마이페이지', link: '' },
+                { title: '채팅', link: '' },
+                { title: '로그아웃', link: '', action: 'logout' },
+            ],
             keyword: ''
         };
     },
@@ -56,13 +101,15 @@ export default {
             console.log(this.keyword)
             this.$router.push({name: 'SearchPage', params: { keyword: this.keyword }})
         },
-        logout() {
-            localStorage.removeItem("userInfo")
-            this.$cookies.remove("user")
-            this.isLogin = false
-            this.$store.state.userInfo = null
-            alert('로그아웃 되었습니다.')
-            this.$router.push({name: 'LoginPage'})
+        userItemMethod(action) {
+            if (action === "logout") {
+                localStorage.removeItem("userInfo")
+                this.$cookies.remove("user")
+                this.isLogin = false
+                this.$store.state.userInfo = null
+                alert('로그아웃 되었습니다.')
+                this.$router.push({name: 'LoginPage'})
+            }
         }
     }
 }
@@ -79,6 +126,13 @@ export default {
     }
     .v-btn::before {
         display: none;
+    }
+
+    .v-list-item__title {
+    align-self: center;
+    font-size: 0.85rem;
+    text-align: center;
+    color: #333984;
     }
 
 </style>
