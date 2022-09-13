@@ -1,15 +1,17 @@
 <template>
     <v-container>
-    <h2>공지사항 작성</h2>
+        <h2>공지사항 작성</h2>
+        
+
         <form @submit.prevent="onSubmit">
             <v-row justify="center">
             <v-col cols="12" lg="8">
 
-                <v-select single-line
+                <v-select
+                single-line
                 filled
                 dense
                 rounded
-                single_lined
                 v-model="noticeNecessary"
                 label="분류" :items="necessaryList"></v-select>
 
@@ -41,15 +43,18 @@
                 label="이미지"
                 ></v-file-input>
 
-            <v-img :src="image" alt=""/>
-
-                <v-btn 
-                style="width:100%"
+                <v-btn
+                style="width:85%"
                 depressed
                 rounded
                 outlined color="#2a46ff"
                 type="submit"
                 >등록</v-btn>
+
+                <router-link :to="{ name: 'NoticeListPage' }">
+                    <v-btn depressed rounded outlined color="#2a46ff" class="ml-5" style="width:12%">
+                        <v-icon>mdi-arrow-left</v-icon>
+                    </v-btn></router-link>
 
             </v-col>
             </v-row>
@@ -60,17 +65,31 @@
 <script>
 export default {
     name: 'NoticeRegister',
+    props: {
+        userInfo: {
+            type: Object,
+            require: true,
+        }
+    },
     data() {
         return {
             noticeTitle: '',
             noticeContent: '',
             noticeNecessary: '',
             necessaryList: ['필독','일반'],
-            files: '',
+            files: [],
             image: '',
-
-
         }
+    },
+    created() {
+        this.writer = this.$store.state.userInfo.id
+    },
+    methods: {
+        onSubmit() {
+            const { noticeTitle, noticeContent, noticeNecessary, files, writer } = this
+            this.$emit('submit', { noticeTitle, noticeContent, noticeNecessary, files, writer })
+        }
+        
     }
 }
 </script>
@@ -79,6 +98,7 @@ export default {
     h2 {
         text-align: center;
         padding: 60px;
+        color: #333984;
     }
     .v-text-field {
         font-size: 0.85rem;

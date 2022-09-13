@@ -11,8 +11,8 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/Notice")
-@CrossOrigin(origins = "http:localhost:8080", allowedHeaders = "*")
+@RequestMapping("/notice")
+@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class NoticeController {
 
     @Autowired
