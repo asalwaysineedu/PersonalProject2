@@ -1,7 +1,37 @@
 <template>
 <div>
+  <!-- 이미지 -->
   <v-img src="@/assets/banner.png" style="height:200px"/>
-  <router-link :to="{ name: 'NoticeRegisterPage' }" class="btn"><v-btn>작성</v-btn></router-link>
+
+  <!-- sub menu -->
+  <v-toolbar flat dense outlined>
+    <v-col align="center">
+        <v-btn
+        v-for="communityItem, idx in communityItems" :key="idx" 
+        rounded 
+        small
+        depressed
+        outlined
+        color="#2a46ff"
+        class="ml-3"
+        > {{ communityItem.title }} </v-btn>
+    </v-col>
+  </v-toolbar>
+
+  <v-row>
+    <v-col cols="12">
+      <h2>공지사항</h2>
+    </v-col>
+  </v-row>
+  
+  <v-col>
+    <router-link :to="{name: 'NoticeRegisterPage'}">
+      <v-btn depressed rounded>
+        <v-icon>mdi-pencil-plus</v-icon>
+        작성</v-btn>
+    </router-link>
+  </v-col>
+
   <notice-list :NoticeBoards="NoticeBoards"/>
 </div>
 </template>
@@ -12,7 +42,17 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'NoticeListPage',
+  data() {
+    return {
+      communityItems: [
+                { title: '공지사항', link: '/Notice' },
+                { title: '1:1 문의', link: '' },
+                { title: 'FAQ', link: '' },
+            ],
+    }
+  },
   props: {
+    userInfo: []
   },
   components: {
     NoticeList
@@ -29,6 +69,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+  h2 {
+    text-align: center;
+    padding: 2rem;
+  }
+  
 
 </style>

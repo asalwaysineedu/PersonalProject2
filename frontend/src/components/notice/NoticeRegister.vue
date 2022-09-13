@@ -23,6 +23,14 @@
                 v-model="noticeTitle"
                 label="제목을 입력해주세요." type="text"></v-text-field>
 
+                <v-text-field
+                single-line
+                filled
+                dense
+                rounded
+                v-model="noticeWriter"
+                label="작성자" type="text"></v-text-field>
+
                 <v-textarea
                 single-line
                 filled
@@ -30,18 +38,6 @@
                 rounded
                 v-model="noticeContent" 
                 label="내용을 입력해주세요." type="text" height="350px"></v-textarea>
-
-                <v-file-input
-                single-line
-                filled
-                dense
-                rounded
-                counter
-                multiple
-                show-size
-                truncate-length="15"
-                label="이미지"
-                ></v-file-input>
 
                 <v-btn
                 style="width:85%"
@@ -77,19 +73,14 @@ export default {
             noticeContent: '',
             noticeNecessary: '',
             necessaryList: ['필독','일반'],
-            files: [],
-            image: '',
+            noticeWriter: '',
         }
-    },
-    created() {
-        this.writer = this.$store.state.userInfo.id
     },
     methods: {
         onSubmit() {
-            const { noticeTitle, noticeContent, noticeNecessary, files, writer } = this
-            this.$emit('submit', { noticeTitle, noticeContent, noticeNecessary, files, writer })
+            const { noticeTitle, noticeContent, noticeNecessary, noticeWriter } = this
+            this.$emit('submit', { noticeTitle, noticeContent, noticeNecessary, noticeWriter })
         }
-        
     }
 }
 </script>

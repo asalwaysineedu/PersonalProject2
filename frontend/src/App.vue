@@ -3,18 +3,19 @@
     <v-main style="padding: 0">
       <div v-if="
       this.$route.name == 'MainPage' ||
+      this.$route.name == 'NoticeListPage'
+      ">
+        <the-header/>
+      </div>
+      <router-view/>
+      <!--<div v-if="
+      this.$route.name == 'MainPage' ||
       this.$route.name == 'NoticeListPage' ||
       this.$route.name == 'NoticeRegisterPage' ||
       this.$route.name == 'NoticeModifyPage'
       ">
-        <the-header/>
-      </div>
-      <!--<div v-if="
-      this.$route.name == 'MainPage'
-      ">
-        <the-tag-search/>
+        <the-footer/>
       </div>-->
-      <router-view/>
     </v-main>
     
   </v-app>
@@ -22,11 +23,13 @@
 
 <script>
 import TheHeader from "@/components/layout/TheHeader.vue"
-//import TheTagSearch from "@/components/layout/TheTagSearch.vue"
+//import TheFooter from "@/components/layout/TheFooter.vue"
+
 //import router from './router';
 export default {
   components: {
     TheHeader,
+    //TheFooter
     //TheTagSearch
   },
   name: 'App',

@@ -4,8 +4,10 @@ import Home.training.demo.entity.notice.Notice;
 import Home.training.demo.service.notice.NoticeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -16,14 +18,14 @@ import java.util.List;
 public class NoticeController {
 
     @Autowired
-    private NoticeService service;
+    private NoticeService NoticeService;
 
     // 작성
     @PostMapping("/register")
-    public void NoticeBoardRegister (@Validated @RequestBody Notice notice) {
-        log.info("NoticeBoardRegister()");
+    public void NoticeRegister (@Validated @RequestBody Notice notice) {
+        log.info("NoticeRegister()");
 
-        service.register(notice);
+        NoticeService.register(notice);
     }
 
     // 목록
@@ -31,7 +33,7 @@ public class NoticeController {
     public List<Notice> NoticeBoardList () {
         log.info("NoticeBoardList()");
 
-        return service.list();
+        return NoticeService.list();
     }
 
     // 읽기
@@ -40,7 +42,7 @@ public class NoticeController {
             @PathVariable("noticeNo") Integer noticeNo) {
         log.info("NoticeBoardRead()");
 
-        return service.read(noticeNo);
+        return NoticeService.read(noticeNo);
     }
 
     // 수정
@@ -51,7 +53,7 @@ public class NoticeController {
         log.info("jpaBoardModify(): " + notice);
 
         notice.setNoticeNo(Long.valueOf(noticeNo));
-        service.modify(notice);
+        NoticeService.modify(notice);
 
         return notice;
     }
@@ -62,6 +64,6 @@ public class NoticeController {
             @PathVariable("noticeNo") Integer noticeNo) {
         log.info("NoticeBoardRemove()");
 
-        service.remove(noticeNo);
+        NoticeService.remove(noticeNo);
     }
 }
