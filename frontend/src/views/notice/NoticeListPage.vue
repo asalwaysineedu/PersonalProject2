@@ -14,6 +14,7 @@
         outlined
         color="#2a46ff"
         class="ml-3"
+        :to="communityItem.route"
         > {{ communityItem.title }} </v-btn>
     </v-col>
   </v-toolbar>
@@ -32,7 +33,7 @@
     </router-link>
   </v-col>
 
-  <notice-list :NoticeBoards="NoticeBoards"/>
+  <notice-list :noticeBoards="noticeBoards"/>
 </div>
 </template>
 
@@ -45,9 +46,9 @@ export default {
   data() {
     return {
       communityItems: [
-                { title: '공지사항', link: '/Notice' },
-                { title: '1:1 문의', link: '' },
-                { title: 'FAQ', link: '' },
+                { title: '공지사항', route: '/Notice' },
+                { title: '1:1 문의', route: '' },
+                { title: 'FAQ', route: '' },
             ],
     }
   },
@@ -58,7 +59,7 @@ export default {
     NoticeList
   },
   computed: {
-        ...mapState(['NoticeBoards'])
+        ...mapState(['noticeBoards'])
   },
   mounted () {
         this.fetchNoticeBoardList()

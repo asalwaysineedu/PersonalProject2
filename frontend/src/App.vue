@@ -3,7 +3,8 @@
     <v-main style="padding: 0">
       <div v-if="
       this.$route.name == 'MainPage' ||
-      this.$route.name == 'NoticeListPage'
+      this.$route.name == 'NoticeListPage' ||
+      this.$route.name == 'NoticeReadPage'
       ">
         <the-header/>
       </div>
