@@ -3,8 +3,9 @@
     <v-container>
       <v-row>
 
-        <!-- 작성 버튼 -->
+        <!-- 관리자 : 작성 버튼 -->
         <v-col align="right">
+          <div v-if="this.$store.state.userInfo.auth === '관리자'">
           <router-link :to="{name: 'NoticeRegisterPage'}">
             <v-btn
             rounded
@@ -15,6 +16,7 @@
               작성
             </v-btn>
           </router-link>
+          </div>
         </v-col>
 
         <!-- 검색 -->

@@ -1,10 +1,31 @@
 <template>
   <v-container style="margin-top: 30px;">
-    <!-- 필독, 일반 구분 | 제목 -->
     <v-col cols="12">
+        <!-- 필독, 일반 구분 | 제목 -->
         <v-chip color="primary">{{noticeBoard.noticeNecessary}}</v-chip>
         <h1>{{ noticeBoard.noticeTitle }}</h1>
+        <!-- 관리자 -->
+        <div align="right" v-if="this.$store.state.userInfo.auth === '관리자'">
+        <router-link :to="{ name: 'NoticeModifyPage' }">
+          <v-btn
+          color="#2a46ff"
+          rounded
+          outlined
+          class="mr-2"
+          >수정</v-btn>
+        </router-link>
+        <v-btn
+          color="#2a46ff"
+          rounded
+          outlined
+          @click="onDelete"
+          >삭제</v-btn>
+        </div>
     </v-col>
+
+    
+
+
     <v-divider></v-divider>
 
     <!-- 작성자, 조회수, 등록일 -->
@@ -24,7 +45,7 @@
     </v-col>
     <v-divider></v-divider>
 
-    <!-- 개인:목록 | 관리자:목록,수정,삭제 -->
+    <!-- 목록 -->
     <v-col cols="12" align="center">
       <router-link :to="{ name: 'NoticeListPage' }">
         <v-btn
@@ -34,23 +55,6 @@
         class="mt-3"
         >목록보기</v-btn>
       </router-link>
-      <!-- 관리자 -->
-      <router-link :to="{ name: 'NoticeModifyPage' }">
-        <v-btn
-        color="#2a46ff"
-        rounded
-        outlined
-        class="mt-3"
-        >수정</v-btn>
-      </router-link>
-      <v-btn
-        color="#2a46ff"
-        rounded
-        outlined
-        class="mt-3"
-        @click="onDelete"
-        >삭제</v-btn>
-
     </v-col>
 
   </v-container>
@@ -72,6 +76,7 @@ export default {
   },
   methods: {
     onDelete() {
+      alert('삭제하시겠습니까?')
       const { noticeNo } = this.noticeBoard
       axios.delete(`http://localhost:7777/notice/${noticeNo}`, {noticeNo})
       .then(() => {

@@ -29,7 +29,7 @@
                 dense
                 rounded
                 v-model="noticeWriter"
-                label="작성자" type="text"></v-text-field>
+                readonly></v-text-field>
 
                 <v-textarea
                 single-line
@@ -73,8 +73,11 @@ export default {
             noticeContent: '',
             noticeNecessary: '',
             necessaryList: ['필독','일반'],
-            noticeWriter: '',
+            noticeWriter: this.$store.state.userInfo.auth
         }
+    },
+    create() {
+        this.noticeWriter = this.this.$store.state.userInfo.auth
     },
     methods: {
         onSubmit() {
