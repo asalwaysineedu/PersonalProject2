@@ -24,16 +24,63 @@
     </v-col>
     <v-divider></v-divider>
 
+    <!-- 개인:목록 | 관리자:목록,수정,삭제 -->
+    <v-col cols="12" align="center">
+      <router-link :to="{ name: 'NoticeListPage' }">
+        <v-btn
+        color="#2a46ff"
+        rounded
+        outlined
+        class="mt-3"
+        >목록보기</v-btn>
+      </router-link>
+      <!-- 관리자 -->
+      <router-link :to="{ name: 'NoticeModifyPage' }">
+        <v-btn
+        color="#2a46ff"
+        rounded
+        outlined
+        class="mt-3"
+        >수정</v-btn>
+      </router-link>
+      <v-btn
+        color="#2a46ff"
+        rounded
+        outlined
+        class="mt-3"
+        @click="onDelete"
+        >삭제</v-btn>
+
+    </v-col>
+
   </v-container>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'NoticeRead',
   props: {
     noticeBoard: {
       type: Object,
       require: true
+    },
+    userInfo: {
+      type: Object,
+      require:true
+    }
+  },
+  methods: {
+    onDelete() {
+      const { noticeNo } = this.noticeBoard
+      axios.delete(`http://localhost:7777/notice/${noticeNo}`, {noticeNo})
+      .then(() => {
+        alert('성공적으로 삭제되었습니다.')
+        this.$router.push({ name: 'NoticeListPage' })
+      })
+      .catch(() => {
+        alert('삭제 실패했습니다.')
+      })
     }
   }
 }

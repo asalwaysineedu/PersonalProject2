@@ -20,27 +20,9 @@
     </v-toolbar>
 
     <!-- 공지사항 게시글 -->
-    <notice-read :noticeBoard="noticeBoard"/>
+    <notice-read v-if="noticeBoard" :noticeBoard="noticeBoard"/>
 
-    <!-- 개인:목록 | 관리자:목록,수정,삭제 -->
-    <v-col cols="12" align="center">
-      <router-link :to="{ name: 'NoticeListPage' }">
-        <v-btn
-        color="#2a46ff"
-        rounded
-        outlined
-        class="mt-3"
-        >목록보기</v-btn>
-      </router-link>
-      <router-link :to="{ name: 'NoticeModifyPage' }">
-        <v-btn
-        color="#2a46ff"
-        rounded
-        outlined
-        class="mt-3"
-        >수정</v-btn>
-      </router-link>
-    </v-col>
+    
   </div>
 </template>
 
@@ -51,12 +33,6 @@ import NoticeRead from '@/components/notice/NoticeRead.vue'
 
 export default {
     name: 'NoticeReadPage',
-    props: {
-      noticeNo: {
-        type: String,
-        required: true
-      }
-    },
     components: {
         NoticeRead
     },
@@ -67,6 +43,12 @@ export default {
                   { title: '1:1 문의', route: '' },
                   { title: '이벤트', route: '' },
               ],
+      }
+    },
+    props: {
+      noticeNo: {
+        type: String,
+        required: true
       }
     },
     computed: {
