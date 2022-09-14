@@ -20,8 +20,9 @@
   </v-toolbar>
 
   <v-row>
-    <v-col cols="12">
+    <v-col align="center">
       <h2>공지사항</h2>
+      <p>최신 업데이트된 소식을 만나보세요!</p>
     </v-col>
   </v-row>
   
@@ -48,7 +49,7 @@ export default {
       communityItems: [
                 { title: '공지사항', route: '/Notice' },
                 { title: '1:1 문의', route: '' },
-                { title: 'FAQ', route: '' },
+                { title: '이벤트', route: '' },
             ],
     }
   },
@@ -74,7 +75,11 @@ export default {
 
   h2 {
     text-align: center;
-    padding: 2rem;
+    margin-top: 50px;
+  }
+
+  p {
+    font-size: 14px;
   }
   
 
