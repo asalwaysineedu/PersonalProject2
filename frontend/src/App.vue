@@ -51,10 +51,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.v-application {
+  letter-spacing: -0.05rem;
+}
+</style>
 
+<style>
 a {
   text-decoration: none;
 }
-
 </style>

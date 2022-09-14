@@ -40,14 +40,24 @@ const routes = [
     component: NoticeRegisterPage
   },
   {
-    path: '/Notice/Read/{NoticeNo}',
+    path: '/Notice/Read/:noticeNo',
     name: 'NoticeReadPage',
-    component: NoticeReadPage
+    components: {
+      default: NoticeReadPage
+    },
+    props: {
+      default: true
+    }
   },
   {
-    path: '/Notice/Modify',
+    path: '/Notice/Modify/:noticeNo',
     name: 'NoticeModifyPage',
-    component: NoticeModifyPage
+    components: {
+      default: NoticeModifyPage
+    },
+    props: {
+      default: true
+    }
   },
 ]
 

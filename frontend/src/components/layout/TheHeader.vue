@@ -46,7 +46,7 @@
         </v-menu>
         
         
-        <!-- 프로필 -->
+        <!-- 사용자 서비스 메뉴 리스트 -->
         <v-menu left open-on-hover offset-y>
             <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -119,7 +119,6 @@ export default {
 
     .v-text-field {
         font-size: 0.85rem;
-
     }
     .v-text-field >>> label {
         font-size: 0.85rem;

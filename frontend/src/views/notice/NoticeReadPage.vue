@@ -32,6 +32,14 @@
         class="mt-3"
         >목록보기</v-btn>
       </router-link>
+      <router-link :to="{ name: 'NoticeModifyPage' }">
+        <v-btn
+        color="#2a46ff"
+        rounded
+        outlined
+        class="mt-3"
+        >수정</v-btn>
+      </router-link>
     </v-col>
   </div>
 </template>

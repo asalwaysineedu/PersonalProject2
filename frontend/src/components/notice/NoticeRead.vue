@@ -24,8 +24,6 @@
     </v-col>
     <v-divider></v-divider>
 
-    
-
   </v-container>
 </template>
 

@@ -25,15 +25,8 @@
       <p>최신 업데이트된 소식을 만나보세요!</p>
     </v-col>
   </v-row>
-  
-  <v-col>
-    <router-link :to="{name: 'NoticeRegisterPage'}">
-      <v-btn depressed rounded>
-        <v-icon>mdi-pencil-plus</v-icon>
-        작성</v-btn>
-    </router-link>
-  </v-col>
 
+  <!-- 게시물 목록 컴포넌트 -->
   <notice-list :noticeBoards="noticeBoards"/>
 </div>
 </template>
