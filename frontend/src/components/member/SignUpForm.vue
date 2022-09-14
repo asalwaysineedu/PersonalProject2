@@ -1,87 +1,84 @@
 <template>
-  <div class="signup-wrap">
-    <div class="signup-header">
-      <h1>환영합니다</h1>
-      <p>가입을 통해 더 다양한 서비스를 만나보세요!</p>
-    </div>
+    <v-container>
+      <div class="signup-header">
+        <h1>환영합니다</h1>
+        <p>가입을 통해 더 다양한 서비스를 만나보세요!</p>
+      </div>
 
-  <div class="form-wrap">
-    <v-form @submit.prevent="onSubmit">
-      
-      <!-- 개인 / 사업자 선택 -->
-      <v-radio-group v-model="radioGroup" row>
-        <v-radio :label="`${kindsOfMember[0]}`" :value="`${kindsOfMember[0]}`"></v-radio>
-        <v-radio :label="`${kindsOfMember[1]}`" :value="`${kindsOfMember[1]}`"></v-radio>
-      </v-radio-group>
+      <v-form @submit.prevent="onSubmit">
+          <!-- 개인 / 사업자 선택 -->
+          <v-col cols="12">
+            <v-radio-group v-model="radioGroup" row>
+              <v-radio :label="`${kindsOfMember[0]}`" :value="`${kindsOfMember[0]}`"></v-radio>
+              <v-radio :label="`${kindsOfMember[1]}`" :value="`${kindsOfMember[1]}`"></v-radio>
+            </v-radio-group>
+          </v-col>
 
-    
         <v-row>
-        <v-col sm="9">
-          <v-text-field
-                label="아이디"
-                class="id"
-                v-model="id"
-                :rules="idRules"
-                type="text"
-                single-line
-                filled
-                dense
-                rounded
-                ></v-text-field>
-        </v-col>
-        <v-col sm="3">
-          <v-btn depressed rounded outlined color="#2a46ff" @click="checkId">중복확인</v-btn>
-        </v-col>
-      </v-row>
+          <v-col cols="9">
+            <v-text-field
+              label="아이디"
+              class="id"
+              v-model="id"
+              :rules="idRules"
+              type="text"
+              single-line
+              filled
+              dense
+              rounded
+              style="height:35px;"
+              ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-btn depressed rounded outlined color="#2a46ff" @click="checkId" style="width:100%">중복확인</v-btn>
+          </v-col>
+        </v-row>
 
-        <v-text-field
-          label="비밀번호"
-          class="password"
-          :rules="passwordRules"
-          v-model="password"
-          type="password"
-          single-line
-          filled
-          dense
-          rounded></v-text-field>
+        <v-row>
+          <v-col>
+            <v-text-field
+              style="height:35px;"
+              label="비밀번호"
+              class="mt-3"
+              :rules="passwordRules"
+              v-model="password"
+              type="password"
+              single-line
+              filled
+              dense
+              rounded></v-text-field>
+          </v-col>
+        </v-row>
 
-        <v-text-field
-          label="비밀번호 확인"
-          class="password-check"
-          :rules="passwordCheckRules"
-          type="password"
-          single-line
-          filled
-          dense
-          rounded></v-text-field>
+        <v-row>
+          <v-col>
+            <v-text-field
+              style="height:35px;"
+              label="비밀번호 확인"
+              class="mt-3"
+              :rules="passwordCheckRules"
+              type="password"
+              single-line
+              filled
+              dense
+              rounded></v-text-field>
+          </v-col>
+        </v-row>
 
-        <v-text-field
-          label="닉네임"
-          class="nickname"
-          :rules="nicknameRules"
-          v-model="nickname"
-          single-line
-          filled
-          dense
-          rounded
-        ></v-text-field>
-
-      <!--<v-row>
-        <v-col sm="9">
-          <v-text-field
-            label="핸드폰 번호"
-            class="mobile"
-            :rules="mobileRules"
-            v-model="mobile"
-            single-line
-            filled
-            dense
-            rounded></v-text-field>
-        </v-col>
-        <v-col sm="3">
-          <v-btn depressed rounded outlined color="#2a46ff" @click="checkMobile()">본인인증</v-btn>
-        </v-col>
-      </v-row>-->
+        <v-row>
+          <v-col>
+            <v-text-field
+              label="닉네임"
+              class="mt-3"
+              :rules="nicknameRules"
+              v-model="nickname"
+              single-line
+              filled
+              dense
+              rounded
+            ></v-text-field>
+          </v-col>
+        </v-row>
 
       <div class="signup-btn">
         <v-btn 
@@ -90,14 +87,12 @@
         rounded
         outlined color="#2a46ff"
         type="submit"
+        class="mb-2"
         >가입하기</v-btn>
-          <router-link :to="{ name: 'LoginPage' }">이미 계정이 있으신가요?</router-link>
+          <router-link :to="{ name: 'LoginPage' }" style="color:#2a46ff">이미 계정이 있으신가요?</router-link>
       </div>
-
     </v-form>
-    
-  </div>
-  </div>
+    </v-container>
 </template>
 
 <script>

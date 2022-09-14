@@ -16,6 +16,11 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'LoginPage',
+    component: LoginPage
+  },
+  {
+    path: '/main',
     name: 'MainPage',
     component: MainPage
   },
@@ -23,11 +28,6 @@ const routes = [
     path: '/signup',
     name: 'SignUpPage',
     component: SignUpPage
-  },
-  {
-    path: '/login',
-    name: 'LoginPage',
-    component: LoginPage
   },
   {
     path: '/Notice',

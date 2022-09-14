@@ -2,8 +2,8 @@
     <div class="nav-list-bar">
         <v-app-bar flat color="white">
         <!-- 로고 -->
-        <router-link to="/">
-                <h1><img src="@/assets/healflix_logo.png" style="width:100px" class="mt-3 ml-2"/></h1>
+        <router-link to="/main">
+            <h1><img src="@/assets/healflix_logo.png" style="width:100px" class="mt-3 ml-2"/></h1>
         </router-link>
 
         <v-spacer></v-spacer>
@@ -59,8 +59,22 @@
               </v-btn>
             </template>
 
-            <v-list>
+            <!-- 관리자 관점 -->
+            <v-list v-if="this.$store.state.userInfo.auth === '관리자'">
               <v-list-item
+                v-for="(adminItem, a) in adminItems"
+                :key="a"
+                :to="adminItem.link"
+                link
+                @click="userItemMethod(adminItem.action)"
+              >
+                <v-list-item-title>{{ adminItem.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+
+            <!-- 개인 관점 -->
+            <v-list v-else>
+                <v-list-item
                 v-for="(userItem, u) in userItems"
                 :key="u"
                 :to="userItem.link"
@@ -69,7 +83,8 @@
               >
                 <v-list-item-title>{{ userItem.title }}</v-list-item-title>
               </v-list-item>
-            </v-list>
+            </v-list> 
+            
         </v-menu>
         
         </v-app-bar>
@@ -86,9 +101,13 @@ export default {
                 { title: '1:1 문의', link: '' },
             ],
             userItems: [
-                { title: '마이페이지', link: '' },
-                { title: '채팅', link: '' },
-                { title: '로그아웃', link: '', action: 'logout' },
+                { title: '업로드', link: '' },
+                { title: '설정', link: '' },
+                { title: '로그아웃', action: 'logout' },
+            ],
+            adminItems: [
+                { title: '회원관리', link: '' },
+                { title: '로그아웃', action: 'logout' },
             ],
             keyword: ''
         };
