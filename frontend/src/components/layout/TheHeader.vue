@@ -102,7 +102,7 @@ export default {
             ],
             userItems: [
                 { title: '업로드', link: '' },
-                { title: '대시보드', link: '/profile' },
+                { title: '프로필', link: '/profile' },
                 { title: '로그아웃', action: 'logout' },
             ],
             adminItems: [

@@ -1,13 +1,13 @@
 <template>
-  <div class="login-wrap">
-    <div class="login-header">
-      <h1>로그인</h1>
-    </div>
+<v-container justify="center">
+  <div align="center" class="login-wrap">
+    <v-col cols="12">
+      <h1><img src="@/assets/healflix_logo.png" width="250px" class="mt-3 ml-2"/></h1>
+    </v-col>
 
-    <v-container justify="center">
         <form class="login-form" @submit.prevent="onSubmit">
           <v-row justify="center">
-          <v-col cols="12" lg="8" sm="8">
+          <v-col cols="8">
 
             <v-text-field
                 v-model="id"
@@ -32,22 +32,25 @@
             <v-btn
             class="login-btn"
             style="width:100%"
-            depressed
+            outlined
             rounded
-            color="#333984"
+            color="#2A46FF"
             type="submit">Login</v-btn>
 
-            <v-col>
-              <router-link :to="{ name: '' }">회원가입</router-link>
-              <router-link :to="{ name: '' }">아이디 | 비밀번호 찾기</router-link>
+            <v-divider/>
+
+            <v-col cols="12" class="mt-3">
+              <router-link :to="{ name: 'SignUpPage' }" class="mr-5" style="color:#2A46FF;">회원가입</router-link>
+              <router-link :to="{ name: '' }" style="color:#2A46FF;">아이디 | 비밀번호 찾기</router-link>
             </v-col>
             
           </v-col>
           </v-row>
         </form>
-    </v-container>
+
 
   </div>
+    </v-container>
 </template>
 
 <script>
@@ -70,13 +73,11 @@ export default {
 
 <style lang="scss" scoped>
 
-    .login-header {
-        h1 {
-          text-align: center;
-          padding: 200px 0px 30px 0px;
-          color: #333984;
-        }
-    }
+.login-wrap {
+  margin-top: 12rem;
+  
+}
+
     .login-btn {
       color: white;
     }

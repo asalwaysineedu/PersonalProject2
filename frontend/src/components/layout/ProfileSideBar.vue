@@ -3,7 +3,7 @@
           <v-list-item class="mt-5 ml-4">
                 <!-- 유저 프로필 사진 -->
                 <v-list-item-avatar>
-                    <img src="@/assets/profile_base_img.jpg">
+                  <img src="@/assets/profile_base_img.jpg">
                 </v-list-item-avatar>
 
                 <v-list-item-content>
