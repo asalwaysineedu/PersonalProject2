@@ -6,6 +6,8 @@ import MainPage from '../views/MainPage.vue'
 import SignUpPage from '../views/member/SignUpPage.vue'
 import LoginPage from '../views/member/LoginPage.vue'
 
+import ProfilePage from '../views/member/ProfilePage.vue'
+
 import NoticeListPage from '../views/notice/NoticeListPage.vue'
 import NoticeRegisterPage from '../views/notice/NoticeRegisterPage.vue'
 import NoticeReadPage from '../views/notice/NoticeReadPage.vue'
@@ -28,6 +30,11 @@ const routes = [
     path: '/signup',
     name: 'SignUpPage',
     component: SignUpPage
+  },
+  {
+    path: '/profile',
+    name: 'ProfilePage',
+    component: ProfilePage
   },
   {
     path: '/Notice',

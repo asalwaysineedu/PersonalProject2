@@ -63,10 +63,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
   .login-wrap {
     background-color: #F4F6FF;
     height: 100%;
   }
-
 </style>
